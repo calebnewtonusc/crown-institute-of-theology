@@ -19,12 +19,16 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // The home page opens with a dark hero, so the nav rides light over it
+  // until the user scrolls into the light content below.
+  const onDark = pathname === "/" && !scrolled && !open;
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled || open
           ? "bg-white/80 backdrop-blur-xl border-b border-line/70"
-          : "bg-white/0 border-b border-transparent"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
       <nav className="mx-auto max-w-6xl px-6 lg:px-8">
@@ -42,7 +46,11 @@ export function Nav() {
               className="h-7 w-auto object-contain"
               priority
             />
-            <span className="text-[15px] font-semibold tracking-tight text-ink hidden sm:inline">
+            <span
+              className={`text-[15px] font-semibold tracking-tight hidden sm:inline transition-colors duration-300 ${
+                onDark ? "text-white" : "text-ink"
+              }`}
+            >
               Crown Institute
             </span>
           </Link>
@@ -57,8 +65,14 @@ export function Nav() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`text-[13px] tracking-tight transition-colors duration-200 hover:text-ink ${
-                      active ? "text-ink font-medium" : "text-ink-soft"
+                    className={`text-[13px] tracking-tight transition-colors duration-200 ${
+                      onDark
+                        ? active
+                          ? "text-white font-medium"
+                          : "text-white/70 hover:text-white"
+                        : active
+                          ? "text-ink font-medium"
+                          : "text-ink-soft hover:text-ink"
                     }`}
                   >
                     {item.label}
@@ -80,7 +94,9 @@ export function Nav() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center p-2 -mr-2 text-ink cursor-pointer"
+            className={`md:hidden inline-flex items-center justify-center p-2 -mr-2 cursor-pointer transition-colors duration-300 ${
+              onDark ? "text-white" : "text-ink"
+            }`}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >

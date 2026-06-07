@@ -8,32 +8,33 @@ import { site, whyCrown, programs, faculty, about } from "@/lib/content";
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,#eef4ff_0%,#ffffff_60%)]" />
-        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-36 pb-24 md:pt-44 md:pb-32 text-center">
+      {/* Hero (dark) */}
+      <section className="relative overflow-hidden bg-[#0b0b0d]">
+        {/* warm radial glow + faint gold bokeh */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_28%,rgba(212,160,53,0.18)_0%,rgba(11,11,13,0)_70%)]" />
+        <div className="absolute inset-0 opacity-[0.5] bg-[radial-gradient(circle_at_18%_30%,rgba(224,178,84,0.20)_0,transparent_9%),radial-gradient(circle_at_82%_22%,rgba(224,178,84,0.16)_0,transparent_8%),radial-gradient(circle_at_70%_72%,rgba(224,178,84,0.14)_0,transparent_7%),radial-gradient(circle_at_30%_78%,rgba(224,178,84,0.12)_0,transparent_7%),radial-gradient(circle_at_50%_12%,rgba(224,178,84,0.10)_0,transparent_6%)] blur-[2px]" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#0b0b0d]" />
+
+        <div className="relative mx-auto max-w-6xl px-6 lg:px-8 pt-40 pb-28 md:pt-48 md:pb-36 text-center">
           <Reveal>
             <Image
-              src="/brand/crown.png"
+              src="/brand/wordmark.png"
               alt="Crown Institute of Theology"
-              width={558}
-              height={420}
+              width={1559}
+              height={502}
               priority
-              className="mx-auto h-16 w-auto object-contain md:h-20"
+              className="mx-auto h-28 w-auto object-contain sm:h-32 md:h-40"
             />
-            <p className="mt-5 text-sm font-semibold uppercase tracking-[0.28em] text-ink-soft">
-              Crown Institute of Theology
-            </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="display mt-10 text-5xl sm:text-6xl md:text-7xl text-ink">
+            <h1 className="display mt-10 text-4xl sm:text-6xl md:text-7xl text-white">
               A School for Kingdom
               <br />
               New Covenant Studies
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-2xl text-xl md:text-2xl text-ink-soft leading-relaxed">
+            <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl md:text-2xl text-white/65 leading-relaxed">
               {site.heroSub} Study Scripture deeply, think theologically, and be
               equipped to teach others.
             </p>
@@ -41,7 +42,13 @@ export default function Home() {
           <Reveal delay={0.24}>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <ButtonLink href="/application">Enroll Today</ButtonLink>
-              <TextLink href="/academics">Explore the programs</TextLink>
+              <Link
+                href="/academics"
+                className="group inline-flex items-center gap-0.5 text-[17px] text-[#2997ff] hover:underline underline-offset-2"
+              >
+                Explore the programs
+                <ChevronRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </Reveal>
         </div>
