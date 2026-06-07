@@ -35,11 +35,11 @@ export function Nav() {
             aria-label="Crown Institute of Theology, home"
           >
             <Image
-              src="/brand/icon.png"
+              src="/brand/crown.png"
               alt=""
-              width={28}
-              height={28}
-              className="h-7 w-7 object-contain"
+              width={558}
+              height={420}
+              className="h-7 w-auto object-contain"
               priority
             />
             <span className="text-[15px] font-semibold tracking-tight text-ink hidden sm:inline">

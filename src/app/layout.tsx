@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   description:
     "An online Bible school and seminary for Kingdom New Covenant studies. Bachelor, Master, and Doctoral theology degrees rooted in biblical exegesis and the present reign of Christ.",
-  icons: { icon: "/brand/icon.png" },
+  icons: { icon: "/brand/crown.png" },
   openGraph: {
     title: "Crown Institute of Theology",
     description:

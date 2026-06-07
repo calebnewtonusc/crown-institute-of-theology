@@ -14,13 +14,16 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-36 pb-24 md:pt-44 md:pb-32 text-center">
           <Reveal>
             <Image
-              src="/brand/logo.png"
+              src="/brand/crown.png"
               alt="Crown Institute of Theology"
-              width={622}
-              height={200}
+              width={558}
+              height={420}
               priority
               className="mx-auto h-16 w-auto object-contain md:h-20"
             />
+            <p className="mt-5 text-sm font-semibold uppercase tracking-[0.28em] text-ink-soft">
+              Crown Institute of Theology
+            </p>
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="display mt-10 text-5xl sm:text-6xl md:text-7xl text-ink">
