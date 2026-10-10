@@ -1,61 +1,47 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion";
-import { ButtonLink, Eyebrow } from "@/components/ui";
+import { StaggerGroup, StaggerItem } from "@/components/motion";
+import { ButtonLink, PageHeader } from "@/components/ui";
 import { faculty } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Faculty",
   description:
-    "Meet the authors, pastors, theologians, and missionaries who teach at Crown Institute of Theology.",
+    "Meet the authors, pastors, theologians and missionaries who teach at Crown Institute of Theology.",
 };
 
 export default function FacultyPage() {
   return (
     <>
-      <section className="bg-background pt-36 pb-16 md:pt-44 md:pb-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Reveal>
-            <Eyebrow>Faculty</Eyebrow>
-            <h1 className="display mt-4 text-4xl sm:text-5xl md:text-6xl text-ink">
-              A team with broad and diverse experience.
-            </h1>
-            <p className="mt-6 max-w-2xl text-xl text-ink-soft leading-relaxed">
-              Teachers who have carried the message of the kingdom and the new
-              covenant across the nations, gathered to enrich, challenge, and
-              inspire you.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        label="Faculty"
+        title="Teachers with broad and diverse experience."
+        lead="Dr. Stan Newton has assembled a team of teachers to enrich, challenge and inspire you to dream big."
+      />
 
-      <section className="bg-background pb-24 md:pb-32">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="border-b-2 border-ink bg-paper py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <StaggerGroup className="grid gap-8 md:grid-cols-2">
             {faculty.map((f) => (
-              <StaggerItem key={f.name}>
-                <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line/70 bg-surface-2 sm:flex-row">
-                  <div className="relative aspect-[4/5] w-full shrink-0 bg-surface sm:aspect-auto sm:w-44">
+              <StaggerItem key={f.name} className="h-full">
+                <article className="flex h-full flex-col rounded-[3px] border-2 border-ink bg-paper-2 shadow-hard">
+                  <div className="relative aspect-[4/3] border-b-2 border-ink">
                     <Image
                       src={f.image}
                       alt={f.name}
                       fill
-                      sizes="(max-width: 640px) 100vw, 176px"
-                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
                     />
                   </div>
-                  <div className="flex flex-col p-7">
-                    <h2 className="text-xl font-semibold tracking-tight text-ink">
+                  <div className="p-6 md:p-8">
+                    <h2 className="text-2xl font-bold tracking-tight text-ink">
                       {f.name}
                     </h2>
                     {f.title && (
-                      <p className="mt-1 text-sm font-medium text-accent">
-                        {f.title}
-                      </p>
+                      <p className="mt-1 font-bold text-ink-soft">{f.title}</p>
                     )}
-                    <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
-                      {f.bio}
-                    </p>
+                    <p className="mt-4 leading-relaxed text-ink">{f.bio}</p>
                   </div>
                 </article>
               </StaggerItem>
@@ -64,16 +50,14 @@ export default function FacultyPage() {
         </div>
       </section>
 
-      <section className="bg-surface py-24 md:py-32">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <Reveal>
-            <h2 className="headline text-3xl md:text-5xl text-ink">
-              Study under their guidance.
-            </h2>
-            <div className="mt-10">
-              <ButtonLink href="/application">Apply Now</ButtonLink>
-            </div>
-          </Reveal>
+      <section className="bg-paper-2 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight text-ink md:text-5xl">
+            Study under their guidance.
+          </h2>
+          <div className="mt-10">
+            <ButtonLink href="/application">Apply now</ButtonLink>
+          </div>
         </div>
       </section>
     </>

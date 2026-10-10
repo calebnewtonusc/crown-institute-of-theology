@@ -1,12 +1,12 @@
-// All site copy, sourced verbatim from crowninstituteoftheology.com (2026 snapshot),
-// reformatted for a modern presentation. Charles Seip removed from faculty per request.
+// All site copy comes from crowninstituteoftheology.com, checked against the
+// live site on 2026-10-10 and lightly edited for spelling and punctuation.
+// Nothing here is invented: if the live site does not say it, it is not here.
 
 export const site = {
   name: "Crown Institute of Theology",
-  tagline: "An Online Bible School and Seminary",
+  tagline: "Online Bible School and Seminary",
   heroLine: "A School for Kingdom New Covenant Studies",
-  heroSub: "Pentecostal and Charismatic Theology. Biblical Exegesis.",
-  copyrightYear: 2023,
+  heroSub: "Pentecostal and Charismatic Theology and Biblical Exegesis",
   emails: {
     primary: "crowninstituteoftheology@gmail.com",
     stan: "stannewton@live.com",
@@ -303,7 +303,7 @@ export const programs: Program[] = [
               "The task of world missions based on the Great Commission, announcing Jesus and his kingdom to all nations.",
           },
           {
-            code: "512",
+            code: "",
             title: "Systematic and Biblical Theology III (Theology of Israel)",
             description:
               "An advanced study into Replacement Theology and God's plan for Israel through the lens of both old and new covenants.",
@@ -538,16 +538,85 @@ export const programs: Program[] = [
               "A deep study within the chosen topic with careful citation of all resources, building on previous classes. (10 Credits)",
           },
           {
-            code: "971-991",
+            code: "971-981-991",
             title: "Writing and Defending the Dissertation",
             description:
               "The heart of the program. A dissertation of no less than 150 pages showing original thought, defended before faculty in person or by live video. (15 Credits)",
           },
         ],
       },
+      {
+        name: "For Students Entering with a Doctor of Ministry",
+        note: "Students entering with a minimum Doctor of Ministry degree begin readings on their chosen topic right away, after a consultation with a faculty member.",
+        courses: [
+          {
+            code: "910",
+            title:
+              "Selective Readings and Research for a Doctor of Theology Dissertation",
+            description:
+              "Readings on the student's chosen topic, including From Topic to Thesis by Michael Kibbe, followed by a video chat with the faculty advisor. (5 Credits)",
+          },
+          {
+            code: "920-930",
+            title: "Writing and Defending the Doctor of Theology Dissertation",
+            description:
+              "A dissertation of no less than 150 pages with proper citations and a unique perspective in theological thought, defended by video chat. (10 Credits)",
+          },
+        ],
+      },
     ],
   },
 ];
+
+export const statementOfFaith = {
+  creedIntro:
+    "We are committed to historic, orthodox Christianity as found in the Apostles' Creed.",
+  creed: [
+    "I believe in God, the Father almighty, Creator of heaven and earth.",
+    "I believe in Jesus Christ, his only Son, our Lord. He was conceived by the Holy Spirit and born of the Virgin Mary. He suffered under Pontius Pilate, was crucified, died, and was buried. He descended to the dead. The third day he rose again from the dead. He ascended to heaven, and is seated at the right hand of God the Father Almighty. From there He will come to judge the living and the dead.",
+    "I believe in the Holy Spirit, the holy Christian Church, the communion of saints, the resurrection of the body, and the life everlasting. Amen.",
+  ],
+  naeIntro:
+    "We also embrace statements of faith adopted by the National Association of Evangelicals.",
+  nae: [
+    "We believe the Bible to be the inspired, the only infallible, authoritative Word of God.",
+    "We believe that there is one God, eternally existent in three persons: Father, Son and Holy Spirit.",
+    "We believe in the deity of our Lord Jesus Christ, in His virgin birth, in His sinless life, in His miracles, in His vicarious and atoning death through His shed blood, in His bodily resurrection, in His ascension to the right hand of the Father, and in His personal return in power and glory.",
+    "We believe that for the salvation of lost and sinful people, regeneration by the Holy Spirit is absolutely essential.",
+    "We believe in the present ministry of the Holy Spirit by whose indwelling the Christian is enabled to live a godly life.",
+  ],
+};
+
+// The three doctrinal distinctives, verbatim from the live home page. The
+// short names are labels for scanning, not new claims.
+export const distinctives = {
+  intro:
+    "Crown Institute of Theology has doctrinal distinctives centered around the Kingdom of God and the New Covenant.",
+  items: [
+    {
+      name: "The present reign of the Kingdom",
+      text: "We embrace the present reign of God's Kingdom, inaugurated by the birth, death and resurrection of Christ. The Kingdom of God will increase over generations until the Day of Resurrection when the final enemy, death, will be defeated.",
+    },
+    {
+      name: "The New Covenant",
+      text: "We embrace the New Covenant provided by the death of Jesus which governs our relationship with God. We teach a covenant understanding of the Bible, not a dispensational one.",
+    },
+    {
+      name: "Filled with the Holy Spirit",
+      text: "We embrace that every born-again believer is indwelt by the Holy Spirit at salvation and should be filled with the Holy Spirit, which is separate from salvation. The Spirit gives gifts to the church which should be exercised for the maturity of the Church and the glory of God.",
+    },
+  ],
+};
+
+// Shown on the live site's sidebar as a book by Dr. Stan Newton. Title and
+// subtitle are read off the cover.
+export const book = {
+  title: "Our Rich Root",
+  subtitle:
+    "Kingdom Promises for the Kingdom Age: A Christocentric Interpretation of the Prophets",
+  author: "Stan Newton",
+  image: "/books/our-rich-root.png",
+};
 
 export type TuitionPlan = {
   degree: string;
@@ -578,6 +647,7 @@ export const tuition = {
         "$900 if prepaid",
         "$1,200 if paid monthly at $100 for 12 months",
         "One tuition rate for all students, regardless of how many credit hours are taken",
+        "Church groups of 4 or more: $400 one-time, or 12 payments of $60",
       ],
     },
     {
@@ -590,6 +660,7 @@ export const tuition = {
         "$50.00 per credit hour ($1,800)",
         "Pay $1,400 in full before classes begin and receive $400 off",
         "Monthly: $120 a month for 15 months",
+        "Transferring 3 or more years of Bible school credits? Ask about the B.Th./M.T.S. combination program",
       ],
     },
     {
@@ -602,7 +673,7 @@ export const tuition = {
         "$60.00 per credit hour ($1,800)",
         "Pay $1,400 in full and save $400",
         "Monthly: $120 a month for 15 months",
-        "Enrollment requires a master's degree (or qualifying equivalent)",
+        "Enrollment requires a master's degree. Those with a university (bachelor) degree combined with Bible school and life experience credit may also apply",
       ],
     },
     {
@@ -615,7 +686,7 @@ export const tuition = {
         "$60 per credit hour. Full program of 45 credits: $2,700",
         "$750 discount for a one-time payment of $1,950",
         "When paid over 20 months: $135 a month",
-        "Entering with a doctor's degree (15 hours): $900, or $700 one-time",
+        "Entering with a doctor's degree: 15 hours at $60 ($900), $90 a month for 10 months, or $700 as a one-time payment",
       ],
     },
   ] as TuitionPlan[],
@@ -660,7 +731,7 @@ export const faculty: Faculty[] = [
     name: "Peter Seth Neuberger",
     title: "Missionary, East Africa",
     image: "/faculty/peter-neuberger.png",
-    bio: "Peter and Rebekah Neuberger serve as missionaries in East Africa, now living in Rwanda. Peter is founder and president of Kashabba Tribe Ministries, established in 2007. He says: I love preaching Jesus and ministering the Father's love and seeing the Kingdom of God manifest in the earth with salvations, healings, deliverances, peace, love, joy, miracles, signs, and wonders.",
+    bio: "Peter and Rebekah Neuberger serve as missionaries in East Africa, now living in Rwanda. Peter is founder and president of Kashabba Tribe Ministries, established in 2007.",
   },
   {
     name: "Dr. Martin Trench",

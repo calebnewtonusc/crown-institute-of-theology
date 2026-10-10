@@ -1,37 +1,46 @@
 @import "tailwindcss";
 
 /*
-  Crown Institute of Theology — Apple-inspired design system.
-  Premium white space, SF Pro typography, monochrome palette with a single blue accent.
+  Crown Institute of Theology design tokens.
+
+  Stance: printed signage. Flat blocks of colour, hard edges, hard offset
+  shadows, no gradients, no blur, corners no rounder than 4px. The readers are
+  pastors and older students opening the site on a phone, often abroad, so
+  the type is Atkinson Hyperlegible Next (built by the Braille Institute for
+  low vision) and body text never drops below 17px.
+
+  Gold has exactly one meaning on this site: you can tap this.
 */
 
 :root {
-  --background: #ffffff;
-  --surface: #f5f5f7;
-  --surface-2: #fafafa;
-  --ink: #1d1d1f;
-  --ink-soft: #6e6e73;
-  --ink-faint: #86868b;
-  --line: #d2d2d7;
-  --accent: #0071e3;
-  --accent-hover: #0077ed;
-  --accent-link: #0066cc;
+  --paper: #f3efe6;
+  --paper-2: #e8e1d2;
+  --ink: #16130e;
+  --ink-soft: #4a443a;
+  --ink-faint: #6f675a;
+  --royal: #1c2540;
+  --on-dark: #f3efe6;
+  --on-dark-soft: #c9c1b1;
+  --gold: #e3a12f;
+  --gold-hover: #f0b44c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-faint: var(--ink-faint);
-  --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-link: var(--accent-link);
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    var(--font-inter), "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --color-royal: var(--royal);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-soft: var(--on-dark-soft);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --shadow-hard: 4px 4px 0 0 var(--ink);
+  --shadow-hard-lg: 6px 6px 0 0 var(--ink);
+  --shadow-hard-paper: 4px 4px 0 0 var(--paper);
+  --shadow-hard-paper-lg: 6px 6px 0 0 var(--paper);
 }
 
 * {
@@ -45,46 +54,31 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
-  letter-spacing: -0.01em;
-  text-rendering: optimizeLegibility;
+  font-size: 17px;
+  line-height: 1.6;
 }
 
 ::selection {
-  background: rgba(0, 113, 227, 0.18);
+  background: var(--gold);
+  color: var(--ink);
 }
 
-.display {
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
-}
-
-.headline {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #c7c7cc;
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #aeaeb2;
-  background-clip: padding-box;
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }

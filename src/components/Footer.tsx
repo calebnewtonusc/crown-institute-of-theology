@@ -1,42 +1,31 @@
 import Link from "next/link";
-import { nav, site } from "@/lib/content";
+import { programs, site } from "@/lib/content";
 
-const programLinks = [
-  { label: "Bachelor of Theology", href: "/academics#bachelor-of-theology" },
-  {
-    label: "Master of Theological Studies",
-    href: "/academics#master-of-theological-studies",
-  },
-  { label: "Doctor of Ministry", href: "/academics#doctor-of-ministry" },
-  { label: "Doctor of Theology", href: "/academics#doctor-of-theology" },
-];
-
+// The footer carries only what the nav does not: each degree, the email
+// addresses, and the state approval line.
 export function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-surface border-t border-line/70">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
-            <p className="text-[15px] font-semibold tracking-tight text-ink">
+    <footer className="border-t-2 border-ink bg-paper-2">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-3">
+          <div>
+            <p className="text-xl font-bold tracking-tight text-ink">
               {site.name}
             </p>
-            <p className="mt-2 text-sm text-ink-soft leading-relaxed">
-              {site.tagline}
-            </p>
+            <p className="mt-2 text-ink-soft">{site.tagline}</p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ink-faint">
-              Explore
-            </p>
-            <ul className="mt-4 space-y-2.5">
-              {nav.slice(1).map((item) => (
-                <li key={item.href}>
+            <p className="text-sm font-bold text-ink-faint">Degrees</p>
+            <ul className="mt-3">
+              {programs.map((p) => (
+                <li key={p.slug}>
                   <Link
-                    href={item.href}
-                    className="text-sm text-ink-soft hover:text-ink transition-colors"
+                    href={`/academics#${p.slug}`}
+                    className="inline-flex min-h-11 items-center text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-gold"
                   >
-                    {item.label}
+                    {p.degree} ({p.abbr})
                   </Link>
                 </li>
               ))}
@@ -44,54 +33,27 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ink-faint">
-              Programs
-            </p>
-            <ul className="mt-4 space-y-2.5">
-              {programLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-ink-soft hover:text-ink transition-colors"
+            <p className="text-sm font-bold text-ink-faint">Write to us</p>
+            <ul className="mt-3">
+              {[site.emails.primary, site.emails.stan].map((email) => (
+                <li key={email}>
+                  <a
+                    href={`mailto:${email}`}
+                    className="inline-flex min-h-11 items-center break-all text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-gold"
                   >
-                    {item.label}
-                  </Link>
+                    {email}
+                  </a>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ink-faint">
-              Contact
-            </p>
-            <ul className="mt-4 space-y-2.5">
-              <li>
-                <a
-                  href={`mailto:${site.emails.primary}`}
-                  className="text-sm text-ink-soft hover:text-ink transition-colors break-all"
-                >
-                  {site.emails.primary}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${site.emails.stan}`}
-                  className="text-sm text-ink-soft hover:text-ink transition-colors break-all"
-                >
-                  {site.emails.stan}
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-line/70 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-xs text-ink-faint">
-            All rights reserved. Crown Institute of Theology &copy;{" "}
-            {site.copyrightYear}.
+        <div className="mt-12 flex flex-col gap-3 border-t-2 border-ink pt-6 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            &copy; {year} {site.name}. All rights reserved.
           </p>
-          <p className="text-xs text-ink-faint">
+          <p>
             Approved by the State of Washington, U.S.A. to grant religious
             degrees.
           </p>

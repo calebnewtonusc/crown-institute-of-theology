@@ -1,50 +1,51 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { MotionConfig, motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
-// Apple-style easing: a long, soft ease-out used across product pages.
-const APPLE_EASE = [0.16, 1, 0.3, 1] as const;
+// A short, firm settle: signage slides into place, it does not drift or blur.
+const SETTLE = [0.2, 0.8, 0.2, 1] as const;
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+const rise: Variants = {
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.8, ease: APPLE_EASE },
+    transition: { duration: 0.45, ease: SETTLE },
   },
 };
+
+// Honors the visitor's reduced-motion setting for every animation below.
+export function MotionRoot({ children }: { children: ReactNode }) {
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+}
 
 export function Reveal({
   children,
   delay = 0,
   className,
-  as = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: "div" | "section" | "li" | "span";
 }) {
-  const Tag = motion[as];
   return (
-    <Tag
+    <motion.div
       className={className}
-      variants={fadeUp}
+      variants={rise}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{ delay }}
     >
       {children}
-    </Tag>
+    </motion.div>
   );
 }
 
-const containerStagger: Variants = {
+const stagger: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.07 } },
 };
 
 export function StaggerGroup({
@@ -57,7 +58,7 @@ export function StaggerGroup({
   return (
     <motion.div
       className={className}
-      variants={containerStagger}
+      variants={stagger}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -75,7 +76,7 @@ export function StaggerItem({
   className?: string;
 }) {
   return (
-    <motion.div className={className} variants={fadeUp}>
+    <motion.div className={className} variants={rise}>
       {children}
     </motion.div>
   );

@@ -1,67 +1,54 @@
 import type { Metadata } from "next";
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion";
-import { ButtonLink, Eyebrow } from "@/components/ui";
-import { programs, accreditation } from "@/lib/content";
+import { Reveal } from "@/components/motion";
+import { ButtonLink, PageHeader } from "@/components/ui";
+import { accreditation, programs } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Academics",
   description:
-    "Bachelor of Theology, Master of Theological Studies, Doctor of Ministry, and Doctor of Theology. Full curriculum and course descriptions.",
+    "Bachelor of Theology, Master of Theological Studies, Doctor of Ministry and Doctor of Theology. Full curriculum and course descriptions.",
 };
 
 export default function AcademicsPage() {
   return (
     <>
-      {/* Header */}
-      <section className="bg-background pt-36 pb-16 md:pt-44 md:pb-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Reveal>
-            <Eyebrow>Academics</Eyebrow>
-            <h1 className="display mt-4 text-4xl sm:text-5xl md:text-6xl text-ink">
-              Study to do theology.
-            </h1>
-            <p className="mt-6 max-w-2xl text-xl text-ink-soft leading-relaxed">
-              Four degree programs, each grounded in biblical exegesis,
-              Christocentric hermeneutics, and the present and advancing kingdom
-              of God.
-            </p>
-          </Reveal>
+      <PageHeader
+        label="Academics"
+        title="Four degrees, each grounded in the Word."
+        lead="Biblical exegesis, Christocentric hermeneutics, and the present and advancing kingdom of God, from the bachelor level to the doctorate."
+      >
+        <nav aria-label="Degrees" className="mt-10 flex flex-wrap gap-3">
+          {programs.map((p) => (
+            <a
+              key={p.slug}
+              href={`#${p.slug}`}
+              className="inline-flex min-h-11 items-center rounded-[3px] border-2 border-on-dark px-4 text-[15px] font-bold text-on-dark transition-colors duration-150 hover:bg-on-dark hover:text-ink"
+            >
+              {p.abbr} {p.degree}
+            </a>
+          ))}
+        </nav>
+      </PageHeader>
 
-          {/* Quick jump */}
-          <Reveal delay={0.1}>
-            <div className="mt-10 flex flex-wrap gap-3">
-              {programs.map((p) => (
-                <a
-                  key={p.slug}
-                  href={`#${p.slug}`}
-                  className="rounded-full border border-line/70 bg-surface-2 px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-surface"
-                >
-                  {p.degree}
-                </a>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Programs */}
       {programs.map((p, idx) => (
         <section
           key={p.slug}
           id={p.slug}
-          className={`scroll-mt-20 py-20 md:py-28 ${
-            idx % 2 === 0 ? "bg-surface" : "bg-background"
+          className={`scroll-mt-16 border-b-2 border-ink py-16 md:py-24 ${
+            idx % 2 === 0 ? "bg-paper" : "bg-paper-2"
           }`}
         >
-          <div className="mx-auto max-w-5xl px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <Reveal>
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <span className="text-5xl font-bold tracking-tight text-ink md:text-6xl">
                   {p.abbr}
                 </span>
-                <span className="text-sm text-ink-faint">{p.credits}</span>
+                <span className="text-lg font-bold text-ink-soft">
+                  {p.credits}
+                </span>
               </div>
-              <h2 className="headline mt-4 text-3xl md:text-5xl text-ink">
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
                 {p.degree}
               </h2>
               <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-soft">
@@ -70,92 +57,79 @@ export default function AcademicsPage() {
             </Reveal>
 
             {p.details && (
-              <StaggerGroup className="mt-8 grid gap-4 sm:grid-cols-2">
+              <dl className="mt-8 grid gap-4 sm:grid-cols-2">
                 {p.details.map((d) => (
-                  <StaggerItem
+                  <div
                     key={d.label}
-                    className="rounded-2xl border border-line/70 bg-background p-6"
+                    className="rounded-[3px] border-2 border-ink bg-paper p-5"
                   >
-                    <p className="text-sm font-semibold text-accent">
+                    <dt className="text-sm font-bold text-ink-faint">
                       {d.label}
-                    </p>
-                    <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-                      {d.value}
-                    </p>
-                  </StaggerItem>
+                    </dt>
+                    <dd className="mt-2 leading-relaxed text-ink">{d.value}</dd>
+                  </div>
                 ))}
-              </StaggerGroup>
+              </dl>
             )}
 
             <div className="mt-12 space-y-12">
               {p.groups.map((group) => (
                 <div key={group.name}>
-                  <Reveal>
-                    <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-ink">
-                      {group.name}
-                    </h3>
-                    {group.note && (
-                      <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-ink-soft">
-                        {group.note}
-                      </p>
-                    )}
-                  </Reveal>
-
-                  <StaggerGroup className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line/70 bg-line/70 md:grid-cols-2">
+                  <h3 className="text-xl font-bold tracking-tight text-ink md:text-2xl">
+                    {group.name}
+                  </h3>
+                  {group.note && (
+                    <p className="mt-2 max-w-3xl leading-relaxed text-ink-soft">
+                      {group.note}
+                    </p>
+                  )}
+                  <ul className="mt-5 grid border-t-2 border-ink md:grid-cols-2 md:gap-x-10">
                     {group.courses.map((c, i) => (
-                      <StaggerItem
+                      <li
                         key={`${c.code}-${i}`}
-                        className="bg-background p-6 transition-colors duration-300 hover:bg-surface-2"
+                        className="border-b-2 border-ink py-5"
                       >
-                        <div className="flex items-baseline gap-2">
+                        <p className="font-bold leading-snug text-ink">
                           {c.code && (
-                            <span className="text-sm font-semibold text-accent">
+                            <span className="mr-2 inline-block rounded-[2px] bg-ink px-1.5 py-0.5 text-sm text-paper">
                               {c.code}
                             </span>
                           )}
-                          <h4 className="text-[17px] font-semibold leading-snug text-ink">
-                            {c.title}
-                          </h4>
-                        </div>
-                        <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
+                          {c.title}
+                        </p>
+                        <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">
                           {c.description}
                         </p>
-                      </StaggerItem>
+                      </li>
                     ))}
-                  </StaggerGroup>
+                  </ul>
                 </div>
               ))}
             </div>
 
-            <Reveal className="mt-12">
+            <div className="mt-12">
               <ButtonLink href="/application">
                 Apply for the {p.abbr}
               </ButtonLink>
-            </Reveal>
+            </div>
           </div>
         </section>
       ))}
 
-      {/* Accreditation */}
-      <section className="bg-ink py-20 md:py-28 text-white">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Reveal>
-            <h2 className="headline text-2xl md:text-4xl">
-              Accreditation and operating status
-            </h2>
-          </Reveal>
-          <div className="mt-8 space-y-6">
-            <Reveal delay={0.05}>
-              <p className="text-[15px] leading-relaxed text-white/70">
-                {accreditation.about}
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-[13px] leading-relaxed text-white/50">
-                {accreditation.operatingStatus}
-              </p>
-            </Reveal>
-          </div>
+      <section
+        id="accreditation"
+        className="scroll-mt-16 bg-ink py-16 text-on-dark md:py-24"
+      >
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            Accreditation and operating status
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-on-dark-soft">
+            {accreditation.about}
+          </p>
+          <p className="mt-6 text-[15px] leading-relaxed text-on-dark-soft">
+            {accreditation.operatingStatus}
+          </p>
         </div>
       </section>
     </>

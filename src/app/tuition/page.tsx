@@ -1,116 +1,95 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion";
-import { ButtonLink, Eyebrow } from "@/components/ui";
+import { StaggerGroup, StaggerItem } from "@/components/motion";
+import { ButtonLink, PageHeader } from "@/components/ui";
 import { tuition } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Tuition",
   description:
-    "Quality theological education at very low tuition. A One-Price policy with no application, evaluation, or graduation fees. Scholarships available.",
+    "Quality theological education at very low tuition. A One-Price policy with no application, credit evaluation or graduation fee. Scholarships available.",
 };
 
 export default function TuitionPage() {
   return (
     <>
-      <section className="bg-background pt-36 pb-16 md:pt-44 md:pb-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <Reveal>
-            <Eyebrow>{tuition.heading}</Eyebrow>
-            <h1 className="display mt-4 text-4xl sm:text-5xl md:text-6xl text-ink">
-              One price. No hidden fees.
-            </h1>
-            <p className="mt-6 max-w-2xl text-xl text-ink-soft leading-relaxed">
-              {tuition.intro}
-            </p>
-          </Reveal>
+      <PageHeader
+        label={tuition.heading}
+        title="One price. No hidden fees."
+        lead={tuition.intro}
+      />
 
-          <StaggerGroup className="mt-10 grid gap-4 sm:grid-cols-3">
-            {tuition.highlights.map((h, i) => (
-              <StaggerItem
-                key={i}
-                className="rounded-2xl border border-line/70 bg-surface-2 p-5"
-              >
-                <Check className="h-5 w-5 text-accent" />
-                <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
-                  {h}
-                </p>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
+      <section className="border-b-2 border-ink bg-paper-2">
+        <ul className="mx-auto grid max-w-6xl md:grid-cols-3">
+          {tuition.highlights.map((h, i) => (
+            <li
+              key={h}
+              className={`flex gap-3 px-4 py-6 sm:px-6 lg:px-8 ${
+                i > 0 ? "border-t-2 border-ink md:border-l-2 md:border-t-0" : ""
+              }`}
+            >
+              <Check aria-hidden className="mt-1 h-5 w-5 shrink-0 text-ink" />
+              <span className="leading-relaxed text-ink">{h}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            {tuition.plans.map((plan, i) => (
-              <Reveal key={plan.abbr} delay={i * 0.06}>
-                <div className="flex h-full flex-col rounded-3xl border border-line/70 bg-background p-8 md:p-10">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h2 className="headline text-2xl text-ink">
-                      {plan.degree}
-                    </h2>
-                    <span className="shrink-0 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
-                      {plan.abbr}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-ink-faint">{plan.credits}</p>
-
-                  <div className="mt-6 flex items-baseline gap-2">
-                    <span className="text-5xl font-semibold tracking-tight text-ink">
+      <section className="border-b-2 border-ink bg-paper py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <StaggerGroup className="grid gap-8 md:grid-cols-2">
+            {tuition.plans.map((plan) => (
+              <StaggerItem key={plan.abbr} className="h-full">
+                <div className="flex h-full flex-col rounded-[3px] border-2 border-ink bg-paper-2 p-6 shadow-hard md:p-8">
+                  <p className="text-sm font-bold text-ink-faint">
+                    {plan.abbr}, {plan.credits}
+                  </p>
+                  <h2 className="mt-1 text-2xl font-bold tracking-tight text-ink">
+                    {plan.degree}
+                  </h2>
+                  <p className="mt-6 flex flex-wrap items-baseline gap-x-3">
+                    <span className="text-6xl font-bold tracking-tighter text-ink">
                       {plan.price}
                     </span>
-                    <span className="text-sm text-ink-soft">
+                    <span className="font-bold text-ink-soft">
                       {plan.priceNote}
                     </span>
-                  </div>
-
-                  <ul className="mt-6 flex-1 space-y-3">
-                    {plan.options.map((opt, j) => (
-                      <li key={j} className="flex gap-3">
-                        <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                        <span className="text-[15px] leading-relaxed text-ink-soft">
-                          {opt}
-                        </span>
+                  </p>
+                  <ul className="mt-6 flex-1 border-t-2 border-ink">
+                    {plan.options.map((opt) => (
+                      <li
+                        key={opt}
+                        className="flex gap-3 border-b border-ink/30 py-3"
+                      >
+                        <Check
+                          aria-hidden
+                          className="mt-1 h-4 w-4 shrink-0 text-ink"
+                        />
+                        <span className="leading-relaxed text-ink">{opt}</span>
                       </li>
                     ))}
                   </ul>
-
                   <div className="mt-8">
-                    <ButtonLink
-                      href="/application"
-                      variant="secondary"
-                      className="w-full"
-                    >
-                      Enroll Now
+                    <ButtonLink href="/application" className="w-full">
+                      Enroll in the {plan.abbr}
                     </ButtonLink>
                   </div>
                 </div>
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
-
-          <Reveal className="mt-8">
-            <p className="text-sm text-ink-faint">{tuition.footnote}</p>
-          </Reveal>
+          </StaggerGroup>
+          <p className="mt-8 text-ink-soft">{tuition.footnote}</p>
         </div>
       </section>
 
-      <section className="bg-background py-24 md:py-32">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <Reveal>
-            <h2 className="headline text-3xl md:text-5xl text-ink">
-              Affordable, by design.
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-ink-soft leading-relaxed">
-              We keep tuition low so that more students have the opportunity to
-              study and be equipped for Christian leadership.
-            </p>
-            <div className="mt-10">
-              <ButtonLink href="/application">Begin Today</ButtonLink>
-            </div>
-          </Reveal>
+      <section className="bg-paper-2 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="max-w-3xl text-3xl font-bold tracking-tight text-ink md:text-5xl">
+            Low tuition, so more students can study.
+          </h2>
+          <div className="mt-10">
+            <ButtonLink href="/application">Begin today</ButtonLink>
+          </div>
         </div>
       </section>
     </>
