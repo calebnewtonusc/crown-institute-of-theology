@@ -83,23 +83,36 @@ export default function AcademicsPage() {
                       {group.note}
                     </p>
                   )}
+                  {/* Titles only, each description one tap away: every
+                      course used to print its full paragraph, about 2,100
+                      words on one page. */}
                   <ul className="mt-5 grid border-t-2 border-ink md:grid-cols-2 md:gap-x-10">
                     {group.courses.map((c, i) => (
                       <li
                         key={`${c.code}-${i}`}
-                        className="border-b-2 border-ink py-5"
+                        className="border-b-2 border-ink"
                       >
-                        <p className="font-bold leading-snug text-ink">
-                          {c.code && (
-                            <span className="mr-2 inline-block rounded-[2px] bg-ink px-1.5 py-0.5 text-sm text-paper">
-                              {c.code}
+                        <details className="group">
+                          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 transition-colors duration-150 hover:text-ink-soft [&::-webkit-details-marker]:hidden">
+                            <span className="font-bold leading-snug text-ink">
+                              {c.code && (
+                                <span className="mr-2 inline-block rounded-[2px] bg-ink px-1.5 py-0.5 text-sm text-paper">
+                                  {c.code}
+                                </span>
+                              )}
+                              {c.title}
                             </span>
-                          )}
-                          {c.title}
-                        </p>
-                        <p className="mt-2 text-[16px] leading-relaxed text-ink-soft">
-                          {c.description}
-                        </p>
+                            <span
+                              aria-hidden
+                              className="shrink-0 text-xl font-bold text-ink-faint transition-transform duration-150 group-open:rotate-45"
+                            >
+                              +
+                            </span>
+                          </summary>
+                          <p className="pb-5 text-[16px] leading-relaxed text-ink-soft">
+                            {c.description}
+                          </p>
+                        </details>
                       </li>
                     ))}
                   </ul>
