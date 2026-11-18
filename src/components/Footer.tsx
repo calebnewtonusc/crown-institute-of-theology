@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Crest } from "@/components/Crest";
 import { programs, site } from "@/lib/content";
 
 // The footer carries only what the nav does not: each degree, the email
@@ -9,11 +10,16 @@ export function Footer() {
     <footer className="border-t border-ink/15 bg-paper-2">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-3">
-          <div>
-            <p className="text-xl font-bold tracking-tight text-ink">
-              {site.name}
-            </p>
-            <p className="mt-2 text-ink-soft">{site.tagline}</p>
+          <div className="flex items-start gap-4">
+            <Crest size={88} className="shrink-0" />
+            <div>
+              <p className="font-serif text-xl font-semibold tracking-[0.12em] text-royal">
+                CROWN INSTITUTE
+                <br />
+                <span className="text-sm tracking-[0.3em]">OF THEOLOGY</span>
+              </p>
+              <p className="mt-3 text-ink-soft">{site.tagline}</p>
+            </div>
           </div>
 
           <div>

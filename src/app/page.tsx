@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ClassScene } from "@/components/ClassScene";
+import { Crest } from "@/components/Crest";
 import { WorldMap, type MapTeacher } from "@/components/WorldMap";
 import { ButtonLink } from "@/components/ui";
 import { about, faculty, tuition } from "@/lib/content";
@@ -28,6 +29,29 @@ const PLACES: Record<string, Omit<MapTeacher, "name" | "image">> = {
   "Peter Seth Neuberger": { place: "Peter Neuberger, Rwanda", lat: -1.94, lng: 29.87 },
   "Dr. Martin Trench": { place: "Dr. Trench, Canada", lat: 53.55, lng: -113.49 },
 };
+
+// Three kinds of student, in the school's own words (whyCrown and the program
+// objectives on the live site), each opening the degree that fits.
+const DOORS = [
+  {
+    title: "You want to finish what you started.",
+    body: "Finished a ministry school with no degree to show for it? The Bachelor of Theology can be earned in 10 to 12 months.",
+    cta: "Bachelor of Theology",
+    href: "/academics#bachelor-of-theology",
+  },
+  {
+    title: "You lead a church.",
+    body: "The Doctor of Ministry trains present Christian leaders to be more effective in their service to the church.",
+    cta: "Doctor of Ministry",
+    href: "/academics#doctor-of-ministry",
+  },
+  {
+    title: "You want to dig deep into the Scripture.",
+    body: "Study it from biblical and theological viewpoints, and learn to think for yourself and teach others.",
+    cta: "Master of Theological Studies",
+    href: "/academics#master-of-theological-studies",
+  },
+];
 
 const books = [
   { src: "/books/kingdom-first-1.jpg", title: "Kingdom First, Volume I" },
@@ -62,22 +86,58 @@ export default function Home() {
               </ButtonLink>
             </div>
           </div>
-          <figure>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-paper-2">
-              <Image
-                src={founder.image}
-                alt="Dr. Stan Newton"
-                fill
-                priority
-                sizes="(min-width: 768px) 45vw, 100vw"
-                className="object-cover"
-              />
+          <figure className="relative mx-auto w-full max-w-md">
+            {/* A portrait hung in a hall: gold hairline inset, name plate below */}
+            <div className="bg-sheet p-3 shadow-[0_40px_70px_-40px_rgba(0,0,0,0.55)] sm:p-4">
+              <div className="relative aspect-[4/5] overflow-hidden outline outline-1 -outline-offset-8 outline-gold/70">
+                <Image
+                  src={founder.image}
+                  alt="Dr. Stan Newton"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 420px, 100vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
-            <figcaption className="mt-3 text-[15px] text-ink-soft">
-              Dr. Stan Newton, founder. Moody Bible Institute, D.Min. from
-              Vision International University.
+            <figcaption className="mx-auto -mt-5 w-fit bg-royal px-6 py-2.5 text-center shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)]">
+              <span className="block font-serif text-lg tracking-[0.08em] text-[#e9c77b]">
+                Dr. Stan Newton
+              </span>
+              <span className="block text-[12px] tracking-[0.18em] text-on-dark/80">
+                FOUNDER AND PRESIDENT
+              </span>
             </figcaption>
+            <Crest
+              size={96}
+              className="absolute -left-6 -top-6 hidden drop-shadow-md sm:block"
+            />
           </figure>
+        </div>
+      </section>
+
+      {/* Who studies here: one door for each kind of student */}
+      <section className="bg-paper pb-16 md:pb-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-3xl text-ink md:text-4xl">Who studies at Crown</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {DOORS.map((d) => (
+              <Link
+                key={d.title}
+                href={d.href}
+                className="group flex flex-col justify-between border-t-2 border-royal bg-sheet p-6 shadow-[0_20px_40px_-30px_rgba(0,0,0,0.45)] transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold md:p-7"
+              >
+                <div>
+                  <p className="font-serif text-2xl leading-snug text-ink">{d.title}</p>
+                  <p className="mt-3 text-ink-soft">{d.body}</p>
+                </div>
+                <span className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-royal">
+                  {d.cta}
+                  <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

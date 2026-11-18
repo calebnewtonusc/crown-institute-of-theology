@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { Crest } from "@/components/Crest";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -37,20 +37,18 @@ function Brand({ tone }: { tone: "dark" | "light" }) {
       aria-label="Crown Institute of Theology, home"
       className="group flex min-h-11 shrink-0 items-center gap-2.5"
     >
-      <Image
-        src="/brand/crown.png"
-        alt=""
-        width={558}
-        height={420}
-        className="h-7 w-auto transition-transform duration-150 group-hover:-translate-y-0.5"
-        priority
-      />
+      <Crest size={40} className="shrink-0 transition-transform duration-200 group-hover:rotate-[-4deg]" />
       <span
-        className={`text-[17px] font-bold tracking-tight ${
-          tone === "dark" ? "text-on-dark" : "text-ink"
+        className={`flex flex-col font-serif leading-none ${
+          tone === "dark" ? "text-on-dark" : "text-royal"
         }`}
       >
-        Crown Institute
+        <span className="text-[17px] font-semibold tracking-[0.14em]">
+          CROWN INSTITUTE
+        </span>
+        <span className="mt-1 text-[11px] font-semibold tracking-[0.32em] opacity-80">
+          OF THEOLOGY
+        </span>
       </span>
     </Link>
   );
