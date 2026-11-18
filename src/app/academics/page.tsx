@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/motion";
-import { ButtonLink, PageHeader } from "@/components/ui";
-import { accreditation, programs, enrollUrl } from "@/lib/content";
+import { DegreeExplorer } from "@/components/DegreeExplorer";
+import { PageHeader } from "@/components/ui";
+import { accreditation } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Academics",
   description:
-    "Bachelor of Theology, Master of Theological Studies, Doctor of Ministry and Doctor of Theology. Full curriculum and course descriptions.",
+    "Four degrees in Kingdom and New Covenant theology: Bachelor of Theology, Master of Theological Studies, Doctor of Ministry and Doctor of Theology. Every course, in order.",
 };
 
 export default function AcademicsPage() {
@@ -19,118 +19,9 @@ export default function AcademicsPage() {
           text: "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.",
           ref: "2 Timothy 2:15",
         }}
-      >
-        <nav aria-label="Degrees" className="mt-10 flex flex-wrap gap-3">
-          {programs.map((p) => (
-            <a
-              key={p.slug}
-              href={`#${p.slug}`}
-              className="inline-flex min-h-11 items-center rounded-md border border-ink/20 bg-sheet px-4 text-[15px] font-semibold text-ink transition-colors duration-150 hover:border-royal hover:bg-royal hover:text-on-dark"
-            >
-              {p.abbr} {p.degree}
-            </a>
-          ))}
-        </nav>
-      </PageHeader>
+      />
 
-      {programs.map((p, idx) => (
-        <section
-          key={p.slug}
-          id={p.slug}
-          className={`scroll-mt-16 border-b border-ink/15 py-16 md:py-24 ${
-            idx % 2 === 0 ? "bg-paper" : "bg-paper-2"
-          }`}
-        >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <Reveal>
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <span className="text-5xl font-bold tracking-tight text-ink md:text-6xl">
-                  {p.abbr}
-                </span>
-                <span className="text-lg font-bold text-ink-soft">
-                  {p.credits}
-                </span>
-              </div>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
-                {p.degree}
-              </h2>
-              <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-soft">
-                {p.objective}
-              </p>
-            </Reveal>
-
-            {p.details && (
-              <dl className="mt-8 grid gap-4 sm:grid-cols-2">
-                {p.details.map((d) => (
-                  <div
-                    key={d.label}
-                    className="rounded-[3px] border border-ink/15 bg-paper p-5"
-                  >
-                    <dt className="text-sm font-bold text-ink-faint">
-                      {d.label}
-                    </dt>
-                    <dd className="mt-2 leading-relaxed text-ink">{d.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            )}
-
-            <div className="mt-12 space-y-12">
-              {p.groups.map((group) => (
-                <div key={group.name}>
-                  <h3 className="text-xl font-bold tracking-tight text-ink md:text-2xl">
-                    {group.name}
-                  </h3>
-                  {group.note && (
-                    <p className="mt-2 max-w-3xl leading-relaxed text-ink-soft">
-                      {group.note}
-                    </p>
-                  )}
-                  {/* Titles only, each description one tap away: every
-                      course used to print its full paragraph, about 2,100
-                      words on one page. */}
-                  <ul className="mt-5 grid border-t border-ink/15 md:grid-cols-2 md:gap-x-10">
-                    {group.courses.map((c, i) => (
-                      <li
-                        key={`${c.code}-${i}`}
-                        className="border-b border-ink/15"
-                      >
-                        <details className="group">
-                          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 transition-colors duration-150 hover:text-ink-soft [&::-webkit-details-marker]:hidden">
-                            <span className="font-bold leading-snug text-ink">
-                              {c.code && (
-                                <span className="mr-2 inline-block rounded-[2px] bg-ink px-1.5 py-0.5 text-sm text-paper">
-                                  {c.code}
-                                </span>
-                              )}
-                              {c.title}
-                            </span>
-                            <span
-                              aria-hidden
-                              className="shrink-0 text-xl font-bold text-ink-faint transition-transform duration-150 group-open:rotate-45"
-                            >
-                              +
-                            </span>
-                          </summary>
-                          <p className="pb-5 text-[16px] leading-relaxed text-ink-soft">
-                            {c.description}
-                          </p>
-                        </details>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12">
-              <ButtonLink href={enrollUrl[p.abbr]}>
-                Enroll in the {p.abbr}
-              </ButtonLink>
-            </div>
-          </div>
-        </section>
-      ))}
+      <DegreeExplorer />
 
       <section
         id="accreditation"
