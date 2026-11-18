@@ -1,335 +1,241 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion";
-import { ButtonLink, SignPlate, TextLink } from "@/components/ui";
-import {
-  about,
-  distinctives,
-  faculty,
-  programs,
-  site,
-  tuition,
-  whyCrown,
-} from "@/lib/content";
+import { ArrowRight, Play } from "lucide-react";
+import { ButtonLink } from "@/components/ui";
+import { about, faculty, tuition } from "@/lib/content";
 
-// Step heights on wide screens, so the four degrees read as a staircase from
-// bachelor up to doctorate.
-const STEP_HEIGHT = [
-  "lg:min-h-80",
-  "lg:min-h-88",
-  "lg:min-h-96",
-  "lg:min-h-104",
-];
-
-const heroFacts = [
-  {
-    big: "10 to 12 months",
-    small: "Accelerated track to a Bachelor of Theology",
-  },
-  {
-    big: "No fees",
-    small: "No application, credit evaluation or graduation fee",
-  },
-  { big: "30 days", small: "Full refund of paid tuition if you withdraw" },
+// Real covers, pulled by ISBN on 2026-11-17. Each is a book by Dr. Stan
+// Newton sold under his name.
+const books = [
+  { src: "/books/kingdom-first-1.jpg", title: "Kingdom First, Volume I" },
+  { src: "/books/kingdom-first-2.jpg", title: "Kingdom First, Volume II" },
+  { src: "/books/our-rich-root.png", title: "Our Rich Root" },
+  { src: "/books/kingdom-communion.jpg", title: "Kingdom Communion" },
+  { src: "/books/breakfast-in-tel-aviv.jpg", title: "Breakfast in Tel Aviv" },
 ];
 
 export default function Home() {
   const founder = faculty[0];
   const teachers = faculty.slice(1);
-  const plans = Object.fromEntries(tuition.plans.map((p) => [p.abbr, p]));
   const proverb = about.quotes[1];
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-ink pb-0 pt-8 text-on-dark md:pt-14">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <Image
-              src="/brand/wordmark.png"
-              alt="Crown Institute of Theology"
-              width={1559}
-              height={502}
-              priority
-              className="-ml-3 h-20 w-auto sm:h-28 md:h-32"
-            />
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h1 className="mt-8 max-w-4xl text-[2.6rem] font-bold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
-              A school for Kingdom New Covenant studies.
+      {/* The man who teaches it */}
+      <section className="bg-paper pb-16 pt-10 md:pb-24 md:pt-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-[1.1fr_1fr] md:gap-16">
+          <div>
+            <h1 className="text-[2.4rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-6xl">
+              Study the kingdom of God with Dr. Stan Newton.
             </h1>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-dark-soft md:text-xl">
-              An online Bible school and seminary. {site.heroSub}, from a
-              Bachelor of Theology to a Doctor of Theology.
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+              An online Bible school and seminary for Kingdom New Covenant
+              studies. Watch the lectures, read the books, write the paper, and
+              Dr. Newton reads it himself.
             </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <ButtonLink href="/application" tone="dark">
-                Apply now
-              </ButtonLink>
-              <ButtonLink href="#degrees" variant="secondary" tone="dark">
-                See the four degrees
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href="/application">Apply</ButtonLink>
+              <ButtonLink href="/academics" variant="secondary">
+                See the courses
               </ButtonLink>
             </div>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 border-t-2 border-on-dark/25 md:mt-20">
-          <dl className="mx-auto grid max-w-6xl sm:grid-cols-3">
-            {heroFacts.map((f, i) => (
-              <div
-                key={f.big}
-                className={`px-4 py-6 sm:px-6 lg:px-8 ${
-                  i > 0
-                    ? "border-t-2 border-on-dark/25 sm:border-l-2 sm:border-t-0"
-                    : ""
-                }`}
-              >
-                <dt className="text-2xl font-bold text-on-dark">{f.big}</dt>
-                <dd className="mt-1 text-[15px] leading-snug text-on-dark-soft">
-                  {f.small}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      {/* The price, said plainly */}
-      <section className="border-b-2 border-ink bg-paper py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <p className="text-xl font-bold text-ink-soft">
-              A full Bachelor of Theology for
-            </p>
-            <p className="mt-2 text-[6rem] font-bold leading-none tracking-tighter text-ink sm:text-[9rem] md:text-[11rem]">
-              $900
-            </p>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Prepaid, or $100 a month for 12 months. One price for all 90
-              credits, and generous scholarships for students living in
-              economically depressed nations.
-            </p>
-            <div className="mt-8">
-              <TextLink href="/tuition">Tuition for every degree</TextLink>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Degree staircase */}
-      <section
-        id="degrees"
-        className="scroll-mt-16 border-b-2 border-ink bg-paper-2 py-20 md:py-28"
-      >
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-ink md:text-5xl">
-              From bachelor to doctorate.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-              Once you enroll, we build a program around your background, your
-              biblical interests and your calling.
-            </p>
-          </Reveal>
-
-          <StaggerGroup className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:items-end">
-            {programs.map((p, i) => {
-              const plan = plans[p.abbr];
-              return (
-                <StaggerItem key={p.slug}>
-                  <Link
-                    href={`/academics#${p.slug}`}
-                    className={`group flex h-full flex-col justify-between rounded-[3px] border-2 border-ink bg-paper p-6 shadow-hard transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-1 hover:shadow-hard-lg active:translate-x-1 active:translate-y-1 active:shadow-none ${STEP_HEIGHT[i]}`}
-                  >
-                    <div>
-                      <p className="text-sm font-bold text-ink-faint">
-                        Step {i + 1}
-                      </p>
-                      <p className="mt-3 text-4xl font-bold tracking-tight text-ink">
-                        {p.abbr}
-                      </p>
-                      <h3 className="mt-2 text-lg font-bold leading-snug text-ink">
-                        {p.degree}
-                      </h3>
-                      <p className="mt-1 text-[15px] text-ink-soft">
-                        {p.credits}
-                        {plan ? `, ${plan.price} ${plan.priceNote}` : ""}
-                      </p>
-                    </div>
-                    <span className="mt-8 inline-flex items-center gap-2 font-bold text-ink underline decoration-gold decoration-2 underline-offset-[6px]">
-                      See the courses
-                      <ArrowRight
-                        aria-hidden
-                        className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1"
-                      />
-                    </span>
-                  </Link>
-                </StaggerItem>
-              );
-            })}
-          </StaggerGroup>
-        </div>
-      </section>
-
-      {/* Why Crown */}
-      <section className="bg-paper py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight text-ink md:text-5xl">
-              {whyCrown.heading}
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-              {whyCrown.intro}
-            </p>
-          </Reveal>
-
-          <ol className="mt-12 grid border-t-2 border-ink md:grid-cols-2 md:gap-x-12">
-            {whyCrown.points.map((point, i) => (
-              <li key={point} className="flex gap-5 border-b-2 border-ink py-6">
-                <span className="w-10 shrink-0 text-3xl font-bold leading-none text-ink">
-                  {i + 1}
-                </span>
-                <p className="text-[17px] leading-relaxed text-ink">{point}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Doctrinal distinctives */}
-      <section className="bg-royal py-20 text-on-dark md:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-3xl">
-            <SignPlate tone="dark">What we teach</SignPlate>
-            <h2 className="mt-5 text-3xl font-bold tracking-tight md:text-5xl">
-              The Kingdom of God and the New Covenant.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-on-dark-soft">
-              {distinctives.intro}
-            </p>
-          </Reveal>
-
-          <StaggerGroup className="mt-12 grid gap-px border-2 border-on-dark/30 bg-on-dark/30 md:grid-cols-3">
-            {distinctives.items.map((d, i) => (
-              <StaggerItem key={d.name} className="bg-royal p-6 md:p-8">
-                <p className="text-5xl font-bold leading-none text-on-dark/40">
-                  {i + 1}
-                </p>
-                <h3 className="mt-5 text-xl font-bold">{d.name}</h3>
-                <p className="mt-3 text-[16px] leading-relaxed text-on-dark-soft">
-                  {d.text}
-                </p>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-
-          <Reveal className="mt-10">
-            <TextLink href="/about#statement-of-faith" tone="dark">
-              Read the Statement of Faith
-            </TextLink>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Founder and faculty */}
-      <section className="border-b-2 border-ink bg-paper py-20 md:py-28">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-[2fr_3fr] md:items-center lg:gap-16 lg:px-8">
-          <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[3px] border-2 border-ink shadow-hard-lg">
+          </div>
+          <figure>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-paper-2">
               <Image
                 src={founder.image}
-                alt={founder.name}
+                alt="Dr. Stan Newton"
                 fill
-                sizes="(max-width: 768px) 100vw, 40vw"
+                priority
+                sizes="(min-width: 768px) 45vw, 100vw"
                 className="object-cover"
               />
             </div>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <SignPlate>Founder and President</SignPlate>
-            <h2 className="mt-5 text-3xl font-bold tracking-tight text-ink md:text-5xl">
-              {founder.name}
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-              Studied Scripture at Moody Bible Institute and earned his D.Min.
-              from Vision International University. He teaches classes and will
-              be your guide as you study with the other professors.
-            </p>
-          </Reveal>
+            <figcaption className="mt-3 text-[15px] text-ink-soft">
+              Dr. Stan Newton, founder. Moody Bible Institute, D.Min. from
+              Vision International University.
+            </figcaption>
+          </figure>
         </div>
+      </section>
 
-        <div className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <p className="text-lg font-bold text-ink">
-              Teaching alongside him
-            </p>
-          </Reveal>
-          <StaggerGroup className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {teachers.map((t) => (
-              <StaggerItem key={t.name}>
-                <Link
-                  href="/faculty"
-                  className="group block rounded-[3px] border-2 border-ink bg-paper-2 transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard"
-                >
-                  <div className="relative aspect-[4/3] border-b-2 border-ink">
+      {/* What one class actually is */}
+      <section className="border-t border-ink/15 bg-paper-2 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            How one class works
+          </h2>
+          <div className="mt-10 grid gap-10 md:grid-cols-3">
+            <div>
+              <div className="relative aspect-video overflow-hidden rounded-md bg-ink">
+                <Image
+                  src={founder.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  className="object-cover opacity-70"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-paper/90">
+                    <Play
+                      className="ml-1 h-6 w-6 text-ink"
+                      fill="currentColor"
+                    />
+                  </span>
+                </div>
+                <p className="absolute inset-x-0 bottom-0 bg-ink/80 px-3 py-2 text-[14px] text-on-dark">
+                  Introduction to the Kingdom: The Messiah&apos;s Reign
+                </p>
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-ink">Watch</h3>
+              <p className="mt-1 text-ink-soft">
+                Each class is a set of video lectures. Watch on your own time.
+              </p>
+            </div>
+            <div>
+              <div className="flex aspect-video items-end justify-center gap-3 overflow-hidden rounded-md bg-paper px-4 pt-4">
+                {books.slice(0, 2).map((b) => (
+                  <div key={b.src} className="relative aspect-[2/3] h-[92%]">
                     <Image
-                      src={t.image}
-                      alt={t.name}
+                      src={b.src}
+                      alt={b.title}
                       fill
-                      sizes="(max-width: 640px) 50vw, 20vw"
-                      className="object-cover"
+                      sizes="160px"
+                      className="rounded-sm object-cover"
                     />
                   </div>
-                  <p className="p-3 text-[15px] font-bold leading-snug text-ink">
-                    {t.name}
-                  </p>
-                </Link>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-          <Reveal className="mt-8">
-            <TextLink href="/faculty">Meet the faculty</TextLink>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Proverb */}
-      <section className="bg-ink py-24 text-on-dark md:py-32">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <blockquote className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-              &ldquo;{proverb.text}&rdquo;
-            </blockquote>
-            <p className="mt-6 text-lg text-on-dark-soft">
-              {proverb.author}, Proverbs 25:2
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Final call */}
-      <section className="bg-paper py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-3xl">
-            <h2 className="text-4xl font-bold tracking-tight text-ink md:text-6xl">
-              Invest in yourself.
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink-soft">
-              Send your name, address and email to begin. It&rsquo;s time to
-              start.
-            </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <ButtonLink href="/application">Apply now</ButtonLink>
-              <ButtonLink href="/contact" variant="secondary">
-                Ask a question
-              </ButtonLink>
+                ))}
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-ink">Read</h3>
+              <p className="mt-1 text-ink-soft">
+                Read the textbook or two assigned for the class.
+              </p>
             </div>
-          </Reveal>
+            <div>
+              <div className="flex aspect-video flex-col rounded-md bg-paper p-5">
+                <p className="text-[13px] font-semibold text-ink-soft">Paper</p>
+                <p className="mt-1 font-bold text-ink">Christus Victor</p>
+                <div className="mt-3 space-y-2">
+                  <div className="h-1.5 w-full rounded bg-ink/15" />
+                  <div className="h-1.5 w-11/12 rounded bg-ink/15" />
+                  <div className="h-1.5 w-full rounded bg-ink/15" />
+                  <div className="h-1.5 w-3/4 rounded bg-ink/15" />
+                </div>
+                <p className="mt-auto self-end text-[13px] font-semibold text-royal">
+                  Reviewed by Dr. Newton
+                </p>
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-ink">Write</h3>
+              <p className="mt-1 text-ink-soft">
+                Send in a paper. Dr. Newton reviews it and writes back, then you
+                move to the next class.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* His books */}
+      <section className="bg-paper py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            Taught by the man who wrote the books
+          </h2>
+          <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5">
+            {books.map((b) => (
+              <figure key={b.src}>
+                <div className="relative aspect-[2/3] overflow-hidden rounded-sm bg-paper-2">
+                  <Image
+                    src={b.src}
+                    alt={b.title}
+                    fill
+                    sizes="(min-width: 768px) 18vw, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-2 text-[15px] text-ink-soft">
+                  {b.title}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Degrees, price on the same line */}
+      <section className="border-t border-ink/15 bg-paper py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            Four degrees
+          </h2>
+          <ul className="mt-8 divide-y divide-ink/15 border-y border-ink/15">
+            {tuition.plans.map((p) => (
+              <li key={p.abbr}>
+                <Link
+                  href="/academics"
+                  className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 px-2 py-5 transition-colors hover:bg-paper-2 focus-visible:bg-paper-2"
+                >
+                  <span className="text-xl font-bold text-ink">
+                    {p.degree}{" "}
+                    <span className="font-normal text-ink-soft">
+                      {p.credits}
+                    </span>
+                  </span>
+                  <span className="flex items-center gap-2 text-lg text-ink">
+                    {p.price}{" "}
+                    <span className="text-ink-soft">{p.priceNote}</span>
+                    <ArrowRight className="h-4 w-4 text-ink-soft transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-ink-soft">
+            No application fee, no graduation fee. Full refund within 30 days.
+          </p>
+        </div>
+      </section>
+
+      {/* The teachers */}
+      <section className="bg-paper-2 py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            Also teaching
+          </h2>
+          <div className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-4">
+            {teachers.map((t) => (
+              <Link key={t.name} href="/faculty" className="group">
+                <div className="relative aspect-square overflow-hidden rounded-md bg-paper">
+                  <Image
+                    src={t.image}
+                    alt={t.name}
+                    fill
+                    sizes="(min-width: 768px) 22vw, 45vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <p className="mt-3 font-bold text-ink group-hover:underline">
+                  {t.name}
+                </p>
+                <p className="text-[15px] text-ink-soft">{t.title}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Close */}
+      <section className="bg-ink py-20 text-on-dark md:py-28">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <p className="text-2xl leading-snug md:text-3xl">
+            &ldquo;{proverb.text}&rdquo;
+          </p>
+          <p className="mt-3 text-on-dark-soft">{proverb.author}</p>
+          <div className="mt-10 flex justify-center">
+            <ButtonLink href="/application" tone="dark">
+              Apply to Crown Institute
+            </ButtonLink>
+          </div>
         </div>
       </section>
     </>

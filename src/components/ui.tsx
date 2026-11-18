@@ -26,11 +26,11 @@ export function ButtonLink({
   className = "",
 }: ButtonLinkProps) {
   const base =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-[3px] border-2 px-6 py-3 text-[17px] font-bold transition-[transform,box-shadow,background-color,color] duration-150 cursor-pointer hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none";
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-md border px-6 py-3 text-[17px] font-semibold transition-colors duration-150 cursor-pointer active:scale-[0.98]";
   const shadow =
     tone === "dark"
-      ? "shadow-hard-paper hover:shadow-hard-paper-lg"
-      : "shadow-hard hover:shadow-hard-lg";
+      ? ""
+      : "";
   const styles =
     variant === "primary"
       ? `border-ink bg-gold text-ink hover:bg-gold-hover ${shadow}`

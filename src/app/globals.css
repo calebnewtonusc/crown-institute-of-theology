@@ -37,10 +37,10 @@
   --color-gold: var(--gold);
   --color-gold-hover: var(--gold-hover);
   --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
-  --shadow-hard: 4px 4px 0 0 var(--ink);
-  --shadow-hard-lg: 6px 6px 0 0 var(--ink);
-  --shadow-hard-paper: 4px 4px 0 0 var(--paper);
-  --shadow-hard-paper-lg: 6px 6px 0 0 var(--paper);
+  --shadow-hard: none;
+  --shadow-hard-lg: none;
+  --shadow-hard-paper: none;
+  --shadow-hard-paper-lg: none;
 }
 
 * {
