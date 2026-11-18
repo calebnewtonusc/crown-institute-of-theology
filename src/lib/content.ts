@@ -749,3 +749,35 @@ export const application = {
     "Provide us with your name, address, and email address. It's time to start. Begin today.",
   ],
 };
+
+// Each degree's enrollment page on the live WordPress site, where Stripe takes
+// payment (Dr. Newton, 2026-11-17: "I use Stripe"). The doctor page covers
+// the D.Min. and the Th.D.
+export const enrollUrl: Record<string, string> = {
+  "B.Th.": "https://crowninstituteoftheology.com/memberships-for-bachelor/",
+  "M.T.S.": "https://crowninstituteoftheology.com/memberships-for-masters/",
+  "D.Min.": "https://crowninstituteoftheology.com/memberships-for-doctor/",
+  "Th.D.": "https://crowninstituteoftheology.com/memberships-for-doctor/",
+};
+
+// The same prices as tuition.plans above, as numbers, so the tuition receipt
+// can add them up. Every figure here appears in that plan's options.
+export type PayWay = { label: string; line: string; total: number };
+export const payWays: Record<string, PayWay[]> = {
+  "B.Th.": [
+    { label: "Pay once", line: "Tuition, prepaid", total: 900 },
+    { label: "Monthly", line: "$100 a month for 12 months", total: 1200 },
+  ],
+  "M.T.S.": [
+    { label: "Pay once", line: "Tuition, paid in full", total: 1400 },
+    { label: "Monthly", line: "$120 a month for 15 months", total: 1800 },
+  ],
+  "D.Min.": [
+    { label: "Pay once", line: "Tuition, paid in full", total: 1400 },
+    { label: "Monthly", line: "$120 a month for 15 months", total: 1800 },
+  ],
+  "Th.D.": [
+    { label: "Pay once", line: "Tuition, one-time payment", total: 1950 },
+    { label: "Monthly", line: "$135 a month for 20 months", total: 2700 },
+  ],
+};

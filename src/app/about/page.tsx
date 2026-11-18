@@ -15,40 +15,31 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        label={about.heading}
         title="We teach you theology so you can do theology."
+        verse={{ text: jesus.text, ref: "Matthew 13:11" }}
       />
 
-      <section className="border-b-2 border-ink bg-paper py-16 md:py-24">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[3fr_2fr] lg:px-8">
-          <div className="space-y-6">
-            {about.body.map((para) => (
-              <Reveal key={para.slice(0, 24)}>
-                <p className="text-lg leading-relaxed text-ink md:text-xl">
-                  {para}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="space-y-6">
-            {[jesus, solomon].map((q) => (
-              <figure key={q.author} className="border-l-4 border-ink pl-5">
-                <blockquote className="text-xl font-bold leading-snug text-ink">
-                  &ldquo;{q.text}&rdquo;
-                </blockquote>
-                <figcaption className="mt-2 text-ink-soft">
-                  {q.author}
-                </figcaption>
-              </figure>
-            ))}
-          </Reveal>
+      <section className="bg-paper py-16 md:py-24">
+        <div className="mx-auto max-w-3xl space-y-6 px-4 sm:px-6 lg:px-8">
+          {about.body.map((para, i) => (
+            <p
+              key={para.slice(0, 24)}
+              className={`text-lg leading-relaxed text-ink md:text-xl ${
+                i === 0
+                  ? "first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-serif first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-crimson"
+                  : ""
+              }`}
+            >
+              {para}
+            </p>
+          ))}
         </div>
       </section>
 
       {/* Statement of faith */}
       <section
         id="statement-of-faith"
-        className="scroll-mt-16 border-b-2 border-ink bg-paper-2 py-16 md:py-24"
+        className="scroll-mt-16 border-b border-ink/15 bg-paper-2 py-16 md:py-24"
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Reveal className="max-w-3xl">
@@ -60,32 +51,33 @@ export default function AboutPage() {
             </p>
           </Reveal>
 
-          <Reveal className="mt-10 rounded-[3px] border-2 border-ink bg-paper p-6 shadow-hard md:p-10">
-            <p className="text-sm font-bold text-ink-faint">
+          <div className="mx-auto mt-10 max-w-3xl bg-sheet px-6 py-10 text-center shadow-[0_30px_60px_-30px_rgba(0,0,0,0.4)] sm:px-14 sm:py-14">
+            <p className="font-serif text-3xl text-ink md:text-4xl">
               The Apostles&rsquo; Creed
             </p>
-            <div className="mt-4 space-y-4">
+            <div className="mx-auto mt-3 h-px w-16 bg-crimson" />
+            <div className="mt-8 space-y-5">
               {statementOfFaith.creed.map((line) => (
                 <p
                   key={line.slice(0, 24)}
-                  className="text-lg leading-relaxed text-ink md:text-xl"
+                  className="font-serif text-xl leading-relaxed text-ink md:text-2xl"
                 >
                   {line}
                 </p>
               ))}
             </div>
-          </Reveal>
+          </div>
 
           <Reveal className="mt-12 max-w-3xl">
             <p className="text-lg font-bold text-ink">
               {statementOfFaith.naeIntro}
             </p>
           </Reveal>
-          <ul className="mt-6 grid border-t-2 border-ink md:grid-cols-2 md:gap-x-12">
+          <ul className="mt-6 grid border-t border-ink/15 md:grid-cols-2 md:gap-x-12">
             {statementOfFaith.nae.map((line) => (
               <li
                 key={line.slice(0, 24)}
-                className="border-b-2 border-ink py-5 text-[17px] leading-relaxed text-ink"
+                className="border-b border-ink/15 py-5 text-[17px] leading-relaxed text-ink"
               >
                 {line}
               </li>
@@ -108,11 +100,11 @@ export default function AboutPage() {
           <ol className="mt-10 space-y-8">
             {distinctives.items.map((d, i) => (
               <li key={d.name} className="flex gap-5 md:gap-8">
-                <span className="w-10 shrink-0 text-4xl font-bold leading-none text-on-dark/40">
+                <span className="w-12 shrink-0 font-serif text-6xl leading-none text-gold">
                   {i + 1}
                 </span>
                 <div className="max-w-3xl">
-                  <h3 className="text-xl font-bold">{d.name}</h3>
+                  <h3 className="text-2xl md:text-3xl">{d.name}</h3>
                   <p className="mt-2 text-lg leading-relaxed text-on-dark-soft">
                     {d.text}
                   </p>
@@ -120,52 +112,15 @@ export default function AboutPage() {
               </li>
             ))}
           </ol>
+          <a
+            href="/academics#accreditation"
+            className="mt-12 inline-flex min-h-11 items-center font-semibold text-on-dark underline decoration-gold decoration-2 underline-offset-4 hover:decoration-on-dark"
+          >
+            Accreditation and operating status
+          </a>
         </div>
       </section>
 
-      {/* Book */}
-      <section className="border-b-2 border-ink bg-paper py-16 md:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-[1fr_2fr] lg:px-8">
-          <Reveal>
-            <div className="mx-auto w-48 overflow-hidden rounded-[3px] border-2 border-ink shadow-hard-lg sm:w-56 md:mx-0">
-              <Image
-                src={book.image}
-                alt={`Cover of ${book.title} by ${book.author}`}
-                width={406}
-                height={610}
-                className="h-auto w-full"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p className="text-sm font-bold text-ink-faint">
-              A book by Dr. {book.author}
-            </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink md:text-5xl">
-              {book.title}
-            </h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
-              {book.subtitle}
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-paper-2 py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <h2 className="max-w-3xl text-3xl font-bold tracking-tight text-ink md:text-5xl">
-              Ready to dig deep and be challenged?
-            </h2>
-            <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center">
-              <ButtonLink href="/application">Begin today</ButtonLink>
-              <TextLink href="/academics#accreditation">
-                Accreditation and operating status
-              </TextLink>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }

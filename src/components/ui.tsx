@@ -101,31 +101,45 @@ export function SignPlate({
   );
 }
 
-// Every inner page opens on the same ink band so the nav always sits on dark.
+// Every inner page opens light on paper, title in the book face and one verse
+// beside it. The black band and label chip it replaced read as a services
+// page (Caleb, 2026-11-17: "it doesn't give the vibe of the institute").
 export function PageHeader({
-  label,
   title,
   lead,
+  verse,
   children,
 }: {
-  label: string;
+  label?: string;
   title: string;
   lead?: string;
+  verse?: { text: string; ref: string };
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-ink pb-16 pt-10 text-on-dark md:pb-24 md:pt-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <SignPlate tone="dark">{label}</SignPlate>
-        <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-          {title}
-        </h1>
-        {lead && (
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-dark-soft md:text-xl">
-            {lead}
-          </p>
+    <section className="border-b border-ink/15 bg-paper pb-14 pt-12 md:pb-20 md:pt-20">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-[1.4fr_1fr] md:items-end lg:px-8">
+        <div>
+          <h1 className="max-w-3xl text-[2.6rem] leading-[1.02] text-ink sm:text-6xl md:text-7xl">
+            {title}
+          </h1>
+          {lead && (
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
+              {lead}
+            </p>
+          )}
+        </div>
+        {verse && (
+          <blockquote className="border-l-0 md:border-l md:border-ink/20 md:pl-8">
+            <p className="font-serif text-2xl italic leading-snug text-ink md:text-[1.7rem]">
+              &ldquo;{verse.text}&rdquo;
+            </p>
+            <footer className="mt-3 text-[15px] font-semibold text-crimson">
+              {verse.ref}
+            </footer>
+          </blockquote>
         )}
-        {children}
+        {children && <div className="md:col-span-2">{children}</div>}
       </div>
     </section>
   );

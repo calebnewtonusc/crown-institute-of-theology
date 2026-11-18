@@ -6,7 +6,7 @@ import { programs, site } from "@/lib/content";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t-2 border-ink bg-paper-2">
+    <footer className="border-t border-ink/15 bg-paper-2">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t-2 border-ink pt-6 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-ink/15 pt-6 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {site.name}. All rights reserved.
           </p>

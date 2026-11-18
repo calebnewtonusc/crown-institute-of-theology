@@ -95,10 +95,10 @@ function ApplyButton({ tone }: { tone: "dark" | "light" }) {
   return (
     <Link
       href="/application"
-      className={`hidden min-h-11 items-center rounded-[3px] border-2 border-ink bg-gold px-4 text-[15px] font-bold text-ink transition-[transform,box-shadow,background-color] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-gold-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none lg:inline-flex ${
+      className={`hidden min-h-11 items-center rounded-[3px] border border-ink/15 bg-gold px-4 text-[15px] font-bold text-ink transition-[transform,box-shadow,background-color] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-gold-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none lg:inline-flex ${
         tone === "dark"
-          ? "shadow-hard-paper hover:shadow-hard-paper-lg"
-          : "shadow-hard hover:shadow-hard-lg"
+          ? "-paper hover:-paper-lg"
+          : " hover:"
       }`}
     >
       Apply
@@ -143,20 +143,20 @@ export function Nav() {
 
   return (
     <>
-      {/* In-flow header: part of the ink band every page opens on. */}
-      <header className="bg-ink">
+      {/* In-flow header on paper: Dr. Newton found the black bands "too dark". */}
+      <header className="border-b border-ink/15 bg-paper">
         <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Brand tone="dark" />
-          <Links tone="dark" pathname={pathname} />
-          <ApplyButton tone="dark" />
-          <MenuButton tone="dark" onOpen={() => setOpen(true)} />
+          <Brand tone="light" />
+          <Links tone="light" pathname={pathname} />
+          <ApplyButton tone="light" />
+          <MenuButton tone="light" onOpen={() => setOpen(true)} />
         </nav>
       </header>
 
       {/* Fixed bar that slides in once the reader scrolls. */}
       <div
         inert={!visible}
-        className={`fixed inset-x-0 top-0 z-40 border-b-2 border-ink bg-paper transition-[transform,opacity] duration-300 ${
+        className={`fixed inset-x-0 top-0 z-40 border-b border-ink/15 bg-paper transition-[transform,opacity] duration-300 ${
           visible
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-full opacity-0"
@@ -211,7 +211,7 @@ export function Nav() {
               <Link
                 href="/application"
                 onClick={() => setOpen(false)}
-                className="flex min-h-14 items-center justify-center rounded-[3px] border-2 border-ink bg-gold text-lg font-bold text-ink shadow-hard-paper transition-[background-color,transform,box-shadow] duration-150 hover:bg-gold-hover active:translate-x-1 active:translate-y-1 active:shadow-none"
+                className="flex min-h-14 items-center justify-center rounded-[3px] border border-ink/15 bg-gold text-lg font-bold text-ink -paper transition-[background-color,transform,box-shadow] duration-150 hover:bg-gold-hover active:translate-x-1 active:translate-y-1 active:shadow-none"
               >
                 Apply now
               </Link>

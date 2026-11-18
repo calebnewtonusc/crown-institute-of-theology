@@ -13,12 +13,14 @@
 */
 
 :root {
-  --paper: #f3efe6;
-  --paper-2: #e8e1d2;
+  --paper: #f6f1e6;
+  --paper-2: #ece4d3;
   --ink: #16130e;
   --ink-soft: #4a443a;
   --ink-faint: #6f675a;
-  --royal: #1c2540;
+  --royal: #163f3a;
+  --crimson: #9b2335;
+  --sheet: #fffdf7;
   --on-dark: #f3efe6;
   --on-dark-soft: #c9c1b1;
   --gold: #e3a12f;
@@ -32,6 +34,9 @@
   --color-ink-soft: var(--ink-soft);
   --color-ink-faint: var(--ink-faint);
   --color-royal: var(--royal);
+  --color-crimson: var(--crimson);
+  --color-sheet: var(--sheet);
+  --font-serif: var(--font-garamond), Georgia, serif;
   --color-on-dark: var(--on-dark);
   --color-on-dark-soft: var(--on-dark-soft);
   --color-gold: var(--gold);
@@ -80,5 +85,16 @@ body {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* Headings in the book face; body stays Atkinson for low vision. */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 }

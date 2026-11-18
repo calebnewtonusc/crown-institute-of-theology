@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion";
 import { ButtonLink, PageHeader } from "@/components/ui";
-import { accreditation, programs } from "@/lib/content";
+import { accreditation, programs, enrollUrl } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Academics",
@@ -13,16 +13,19 @@ export default function AcademicsPage() {
   return (
     <>
       <PageHeader
-        label="Academics"
         title="Four degrees, each grounded in the Word."
         lead="Biblical exegesis, Christocentric hermeneutics, and the present and advancing kingdom of God, from the bachelor level to the doctorate."
+        verse={{
+          text: "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.",
+          ref: "2 Timothy 2:15",
+        }}
       >
         <nav aria-label="Degrees" className="mt-10 flex flex-wrap gap-3">
           {programs.map((p) => (
             <a
               key={p.slug}
               href={`#${p.slug}`}
-              className="inline-flex min-h-11 items-center rounded-[3px] border-2 border-on-dark px-4 text-[15px] font-bold text-on-dark transition-colors duration-150 hover:bg-on-dark hover:text-ink"
+              className="inline-flex min-h-11 items-center rounded-md border border-ink/20 bg-sheet px-4 text-[15px] font-semibold text-ink transition-colors duration-150 hover:border-royal hover:bg-royal hover:text-on-dark"
             >
               {p.abbr} {p.degree}
             </a>
@@ -34,7 +37,7 @@ export default function AcademicsPage() {
         <section
           key={p.slug}
           id={p.slug}
-          className={`scroll-mt-16 border-b-2 border-ink py-16 md:py-24 ${
+          className={`scroll-mt-16 border-b border-ink/15 py-16 md:py-24 ${
             idx % 2 === 0 ? "bg-paper" : "bg-paper-2"
           }`}
         >
@@ -61,7 +64,7 @@ export default function AcademicsPage() {
                 {p.details.map((d) => (
                   <div
                     key={d.label}
-                    className="rounded-[3px] border-2 border-ink bg-paper p-5"
+                    className="rounded-[3px] border border-ink/15 bg-paper p-5"
                   >
                     <dt className="text-sm font-bold text-ink-faint">
                       {d.label}
@@ -86,11 +89,11 @@ export default function AcademicsPage() {
                   {/* Titles only, each description one tap away: every
                       course used to print its full paragraph, about 2,100
                       words on one page. */}
-                  <ul className="mt-5 grid border-t-2 border-ink md:grid-cols-2 md:gap-x-10">
+                  <ul className="mt-5 grid border-t border-ink/15 md:grid-cols-2 md:gap-x-10">
                     {group.courses.map((c, i) => (
                       <li
                         key={`${c.code}-${i}`}
-                        className="border-b-2 border-ink"
+                        className="border-b border-ink/15"
                       >
                         <details className="group">
                           <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 transition-colors duration-150 hover:text-ink-soft [&::-webkit-details-marker]:hidden">
@@ -121,8 +124,8 @@ export default function AcademicsPage() {
             </div>
 
             <div className="mt-12">
-              <ButtonLink href="/application">
-                Apply for the {p.abbr}
+              <ButtonLink href={enrollUrl[p.abbr]}>
+                Enroll in the {p.abbr}
               </ButtonLink>
             </div>
           </div>
@@ -131,16 +134,16 @@ export default function AcademicsPage() {
 
       <section
         id="accreditation"
-        className="scroll-mt-16 bg-ink py-16 text-on-dark md:py-24"
+        className="scroll-mt-16 border-t border-ink/15 bg-paper-2 py-16 md:py-24"
       >
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="text-3xl text-ink md:text-4xl">
             Accreditation and operating status
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-on-dark-soft">
+          <p className="mt-6 text-lg leading-relaxed text-ink">
             {accreditation.about}
           </p>
-          <p className="mt-6 text-[15px] leading-relaxed text-on-dark-soft">
+          <p className="mt-6 text-[15px] leading-relaxed text-ink-soft">
             {accreditation.operatingStatus}
           </p>
         </div>

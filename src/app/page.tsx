@@ -194,7 +194,7 @@ export default function Home() {
           <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-6">
             {faculty.map((t) => (
               <li key={t.name} className="flex items-center gap-3">
-                <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border-2 border-ink">
+                <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-ink/15">
                   <Image src={t.image} alt="" fill sizes="44px" className="object-cover" />
                 </span>
                 <span className="text-[15px] leading-tight">
@@ -209,7 +209,7 @@ export default function Home() {
               <span className="h-3 w-3 rounded-full bg-gold" /> Where students have studied from
             </span>
             <span className="flex items-center gap-2">
-              <span className="h-4 w-4 rounded-full border-2 border-ink bg-paper-2" /> Where the teachers serve
+              <span className="h-4 w-4 rounded-full border border-ink/15 bg-paper-2" /> Where the teachers serve
             </span>
             <Link href="/faculty" className="font-semibold text-ink underline decoration-gold decoration-2 underline-offset-4 hover:decoration-ink">
               Meet the teachers
