@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     template: "%s | Crown Institute of Theology",
   },
   description:
-    "An online Bible school and seminary for Kingdom New Covenant studies. Bachelor of Theology, Master of Theological Studies, Doctor of Ministry and Doctor of Theology.",
+    "An online Bible school and seminary for Kingdom and New Covenant studies. Bachelor of Theology, Master of Theological Studies, Doctor of Ministry and Doctor of Theology.",
   icons: { icon: "/brand/crown.png" },
   openGraph: {
     title: "Crown Institute of Theology",
     description:
-      "An online Bible school and seminary for Kingdom New Covenant studies.",
+      "An online Bible school and seminary for Kingdom and New Covenant studies.",
     type: "website",
   },
 };

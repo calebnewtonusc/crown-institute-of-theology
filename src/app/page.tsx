@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { ClassScene } from "@/components/ClassScene";
 import { ButtonLink } from "@/components/ui";
 import { about, faculty, tuition } from "@/lib/content";
 
@@ -29,7 +30,7 @@ export default function Home() {
               Study the kingdom of God with Dr. Stan Newton.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-              An online Bible school and seminary for Kingdom New Covenant
+              An online Bible school and seminary for Kingdom and New Covenant
               studies. Watch the lectures, read the books, write the paper, and
               Dr. Newton reads it himself.
             </p>
@@ -59,81 +60,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What one class actually is */}
-      <section className="border-t border-ink/15 bg-paper-2 py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            How one class works
-          </h2>
-          <div className="mt-10 grid gap-10 md:grid-cols-3">
-            <div>
-              <div className="relative aspect-video overflow-hidden rounded-md bg-ink">
-                <Image
-                  src={founder.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 30vw, 100vw"
-                  className="object-cover opacity-70"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-paper/90">
-                    <Play
-                      className="ml-1 h-6 w-6 text-ink"
-                      fill="currentColor"
-                    />
-                  </span>
-                </div>
-                <p className="absolute inset-x-0 bottom-0 bg-ink/80 px-3 py-2 text-[14px] text-on-dark">
-                  Introduction to the Kingdom: The Messiah&apos;s Reign
-                </p>
-              </div>
-              <h3 className="mt-4 text-xl font-bold text-ink">Watch</h3>
-              <p className="mt-1 text-ink-soft">
-                Each class is a set of video lectures. Watch on your own time.
-              </p>
-            </div>
-            <div>
-              <div className="flex aspect-video items-end justify-center gap-3 overflow-hidden rounded-md bg-paper px-4 pt-4">
-                {books.slice(0, 2).map((b) => (
-                  <div key={b.src} className="relative aspect-[2/3] h-[92%]">
-                    <Image
-                      src={b.src}
-                      alt={b.title}
-                      fill
-                      sizes="160px"
-                      className="rounded-sm object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <h3 className="mt-4 text-xl font-bold text-ink">Read</h3>
-              <p className="mt-1 text-ink-soft">
-                Read the textbook or two assigned for the class.
-              </p>
-            </div>
-            <div>
-              <div className="flex aspect-video flex-col rounded-md bg-paper p-5">
-                <p className="text-[13px] font-semibold text-ink-soft">Paper</p>
-                <p className="mt-1 font-bold text-ink">Christus Victor</p>
-                <div className="mt-3 space-y-2">
-                  <div className="h-1.5 w-full rounded bg-ink/15" />
-                  <div className="h-1.5 w-11/12 rounded bg-ink/15" />
-                  <div className="h-1.5 w-full rounded bg-ink/15" />
-                  <div className="h-1.5 w-3/4 rounded bg-ink/15" />
-                </div>
-                <p className="mt-auto self-end text-[13px] font-semibold text-royal">
-                  Reviewed by Dr. Newton
-                </p>
-              </div>
-              <h3 className="mt-4 text-xl font-bold text-ink">Write</h3>
-              <p className="mt-1 text-ink-soft">
-                Send in a paper. Dr. Newton reviews it and writes back, then you
-                move to the next class.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ClassScene
+        lectureImage={founder.image}
+        bookCover="/books/kingdom-first-1.jpg"
+      />
 
       {/* His books */}
       <section className="bg-paper py-16 md:py-24">
@@ -225,14 +155,14 @@ export default function Home() {
       </section>
 
       {/* Close */}
-      <section className="bg-ink py-20 text-on-dark md:py-28">
+      <section className="border-t border-ink/15 bg-paper-2 py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <p className="text-2xl leading-snug md:text-3xl">
             &ldquo;{proverb.text}&rdquo;
           </p>
-          <p className="mt-3 text-on-dark-soft">{proverb.author}</p>
+          <p className="mt-3 text-ink-soft">{proverb.author}</p>
           <div className="mt-10 flex justify-center">
-            <ButtonLink href="/application" tone="dark">
+            <ButtonLink href="/application">
               Apply to Crown Institute
             </ButtonLink>
           </div>

@@ -5,7 +5,7 @@
 export const site = {
   name: "Crown Institute of Theology",
   tagline: "Online Bible School and Seminary",
-  heroLine: "A School for Kingdom New Covenant Studies",
+  heroLine: "A School for Kingdom and New Covenant Studies",
   heroSub: "Pentecostal and Charismatic Theology and Biblical Exegesis",
   emails: {
     primary: "crowninstituteoftheology@gmail.com",
