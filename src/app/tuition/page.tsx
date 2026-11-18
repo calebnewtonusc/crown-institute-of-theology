@@ -13,21 +13,16 @@ export default function TuitionPage() {
   return (
     <>
       <PageHeader
-        title="One price. No hidden fees."
-        lead={tuition.intro}
+        title="A Bachelor of Theology for $900."
         verse={{
           text: "For which of you, intending to build a tower, sitteth not down first, and counteth the cost?",
           ref: "Luke 14:28",
         }}
       />
 
-      <section className="bg-paper-2 py-16 md:py-24">
+      <section className="bg-paper pt-10 pb-16 md:pb-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl text-ink md:text-5xl">Count the cost</h2>
-          <p className="mt-3 max-w-xl text-lg text-ink-soft">
-            Pick a degree and a way to pay. This is the whole bill.
-          </p>
-          <div className="mt-10">
+          <div>
             <TuitionReceipt />
           </div>
         </div>

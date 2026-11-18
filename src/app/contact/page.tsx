@@ -15,7 +15,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader
-        title="We would love to hear from you."
+        title="Questions about Crown Institute?"
         lead="Please contact us with any questions, testimonies, suggestions or recommendations."
       />
 

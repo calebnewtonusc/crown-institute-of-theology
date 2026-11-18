@@ -304,7 +304,7 @@ export function DegreeExplorer() {
   return (
     <>
       {/* The shelf: one spine per degree */}
-      <section aria-label="Choose a degree" className="bg-paper pt-10 md:pt-14">
+      <section aria-label="Choose a degree" className="bg-paper pt-6 md:pt-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <p className="font-semibold text-ink">Pick a degree off the shelf</p>
           <div role="tablist" className="mt-5 flex items-end gap-2 sm:gap-3">

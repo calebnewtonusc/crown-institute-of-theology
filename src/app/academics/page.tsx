@@ -13,9 +13,8 @@ export default function AcademicsPage() {
   return (
     <>
       <PageHeader
-        title="Four degrees, each grounded in the Word."
-        lead="Biblical exegesis, Christocentric hermeneutics, and the present and advancing kingdom of God, from the bachelor level to the doctorate."
-        verse={{
+        title="From a Bachelor of Theology to a doctorate, one class at a time."
+                verse={{
           text: "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth.",
           ref: "2 Timothy 2:15",
         }}

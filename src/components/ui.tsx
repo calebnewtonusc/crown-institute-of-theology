@@ -101,9 +101,11 @@ export function SignPlate({
   );
 }
 
-// Every inner page opens light on paper, title in the book face and one verse
-// beside it. The black band and label chip it replaced read as a services
-// page (Caleb, 2026-11-17: "it doesn't give the vibe of the institute").
+// A short opener so each page's own object (the shelf, the receipt, the
+// letter, Dr. Newton) sits in the first screen. The earlier split hero, a big
+// serif title beside an italic verse under a rule, was the same on every page
+// and read as generated (Caleb, 2026-11-17: "Why does this look ai generated,
+// and the FF site doesnt").
 export function PageHeader({
   title,
   lead,
@@ -117,29 +119,27 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="border-b border-ink/15 bg-paper pb-14 pt-12 md:pb-20 md:pt-20">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-[1.4fr_1fr] md:items-end lg:px-8">
-        <div>
-          <h1 className="max-w-3xl text-[2.6rem] leading-[1.02] text-ink sm:text-6xl md:text-7xl">
-            {title}
-          </h1>
-          {lead && (
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
-              {lead}
-            </p>
-          )}
-        </div>
-        {verse && (
-          <blockquote className="border-l-0 md:border-l md:border-ink/20 md:pl-8">
-            <p className="font-serif text-2xl italic leading-snug text-ink md:text-[1.7rem]">
-              &ldquo;{verse.text}&rdquo;
-            </p>
-            <footer className="mt-3 text-[15px] font-semibold text-crimson">
-              {verse.ref}
-            </footer>
-          </blockquote>
+    <section className="bg-paper pt-10 pb-2 md:pt-14">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h1 className="max-w-4xl text-4xl leading-[1.05] text-ink md:text-6xl">
+          {title}
+        </h1>
+        {lead && (
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+            {lead}
+          </p>
         )}
-        {children && <div className="md:col-span-2">{children}</div>}
+        {verse && (
+          <p className="mt-4 max-w-2xl text-[15px] text-ink-soft">
+            <span className="font-serif text-lg italic text-ink">
+              &ldquo;{verse.text}&rdquo;
+            </span>{" "}
+            <span className="whitespace-nowrap font-semibold text-crimson">
+              {verse.ref}
+            </span>
+          </p>
+        )}
+        {children}
       </div>
     </section>
   );
